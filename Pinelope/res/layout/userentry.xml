@@ -9,6 +9,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/pinelope"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:padding="10dp" />
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Welcome to Pinelope, your personal shoppping assistant. Pinelope will help you find the perfect gift for your friends via Pinterest."
+        android:padding="10dp"/>
+    <LinearLayout 
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10px">
+        <EditText 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Username"/>
+        <Button 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textSize="16sp"/>
+    </LinearLayout>
 
 </LinearLayout>
