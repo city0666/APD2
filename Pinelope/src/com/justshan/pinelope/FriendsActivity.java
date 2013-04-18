@@ -18,6 +18,7 @@ import org.jsoup.select.Elements;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -104,11 +105,9 @@ public class FriendsActivity extends Activity {
 			// get all value from result to display in TextView
 
 
-			//Spinner spinner = (Spinner) findViewById(R.id.spinner); // Create an ArrayAdapter using the string array and a default spinner layout
 			ListView _listview = (ListView) findViewById(R.id.listView1);
 			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(FriendsActivity.this, android.R.layout.simple_list_item_1, arrayBoards);
-			// Specify the layout to use when the list of choices appears
-			//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Apply the adapter to the spinner
+			
 			_listview.setAdapter(_adapter);
 			Log.i("ListView", "lv populated");
 
@@ -117,7 +116,6 @@ public class FriendsActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
 
-					//HashMap<String, String> o = (HashMap<String, String>) _listview.getItemAtPosition(position);
 					
 					if(position > 0){
 						listItem = parent.getItemAtPosition(position).toString();
@@ -127,9 +125,13 @@ public class FriendsActivity extends Activity {
 							myParent = myParent.substring(0, myParent.indexOf(")"));
 
 							System.out.println(myParent);
-							//myParent = myParent.replace(' ', '-');
-							String theURL = ("http://m.pinterest.com/" +  getIntent().getExtras().getString("USER") +"/" + myParent);
+							String theURL = ("http://m.pinterest.com/" + myParent);
 							Log.i("URL", theURL);
+							
+							Intent intent = new Intent(FriendsActivity.this, UserBoards.class);
+							//This is the information that will be sent.
+							intent.putExtra("BOARDS", theURL);
+							startActivity(intent);
 							
 //							WebView boardWebView = (WebView) findViewById(R.id.webview);
 //							//boardWebView.setWebViewClient(new WebClient());
