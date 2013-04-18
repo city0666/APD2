@@ -33,6 +33,7 @@ public class FriendsActivity extends Activity {
 	
 	Spinner spinner;
 	ArrayList<String> arrayBoards = new ArrayList<String>();
+	ArrayList<String> arrayFriends = new ArrayList<String>();
 	final Handler myHandler = new Handler();
 	String spinItem;
 	ListView _listview;
@@ -64,25 +65,28 @@ public class FriendsActivity extends Activity {
 		protected ArrayList<String> doInBackground(Void... params) {
 
 			Document doc;
-			String linkText = ""; 
+			String linkText = "";
+			String linkHref = "";
 
 			try {
 				doc = Jsoup.connect("http://m.pinterest.com/" + getIntent().getExtras().getString("USER") + "/following/").get();
-				Elements links = doc.select("span.user_name");
-				for (Element el : links) { 
+				//Elements names = doc.select("li a table.pinner tbody tr td span.user_name");
+				Elements usernames = doc.select("li a ");
+				for (Element el : usernames) {
+					linkHref = el.attr("href");
 					linkText = el.text();
 
-					arrayBoards.add(linkText); // add value to ArrayList
+					//arrayFriends.add(linkText); // add value to ArrayList
+					arrayBoards.add(linkText + " " + linkHref); // add value to ArrayList
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return arrayBoards;     //<< return ArrayList from here
+			return arrayBoards; //<< return ArrayList from here
 
 
 		} 
-
 
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
