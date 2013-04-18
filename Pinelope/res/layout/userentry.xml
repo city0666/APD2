@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Welcome to Pinelope, your personal shoppping assistant. Pinelope will help you find the perfect gift for your friends via Pinterest."
+        android:text="Welcome to Pinelope, your personal shopping assistant. Pinelope will help you find the perfect gift for your friends via Pinterest."
         android:padding="10dp"/>
     <LinearLayout 
         android:layout_gravity="center"
@@ -23,10 +23,12 @@
         android:layout_height="wrap_content"
         android:paddingTop="10px">
         <EditText 
+            android:id="@+id/pinuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Username"/>
-        <Button 
+        <Button
+            android:id="@+id/pinusergo" 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"

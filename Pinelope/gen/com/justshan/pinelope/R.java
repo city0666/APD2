@@ -25,9 +25,11 @@ public final class R {
         public static final int pinelope=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f080003;
+        public static final int action_settings=0x7f080005;
         public static final int imageView1=0x7f080002;
         public static final int listView1=0x7f080000;
+        public static final int pinuser=0x7f080003;
+        public static final int pinusergo=0x7f080004;
         public static final int tvWho=0x7f080001;
     }
     public static final class layout {
@@ -68,6 +70,8 @@ public final class R {
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f060003;
+        public static final int MyTheme=0x7f060002;
+        public static final int MyThemeNoAction=0x7f060001;
     }
 }
