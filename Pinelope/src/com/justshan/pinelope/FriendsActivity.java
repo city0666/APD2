@@ -1,15 +1,9 @@
 package com.justshan.pinelope;
 
 import java.io.IOException;
-import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.json.JSONArray;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,35 +11,28 @@ import org.jsoup.select.Elements;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class FriendsActivity extends Activity {
 	
-	Spinner spinner;
-	ArrayList<String> arrayBoards = new ArrayList<String>();
 	ArrayList<String> arrayFriends = new ArrayList<String>();
-	final Handler myHandler = new Handler();
 	String listItem;
 	ListView _listview;
 	SimpleAdapter _adapter;
-	JSONArray _results;
-	Context _context;
-	String _passedData;
-	List<Map<String, String>> _friendData;
+	final Handler myHandler = new Handler();
+
+
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,7 +58,6 @@ public class FriendsActivity extends Activity {
 			Document doc;
 			String linkText = "";
 			String linkHref = "";
-			String myData = "";
 
 			try {
 				doc = Jsoup.connect("http://m.pinterest.com/" + getIntent().getExtras().getString("USER") + "/following/").get();
@@ -85,13 +71,13 @@ public class FriendsActivity extends Activity {
 					theHref = theHref.replace("/", "");
 
 					//arrayFriends.add(linkText); // add value to ArrayList
-					arrayBoards.add(linkText + " (" + theHref +")"); // add value to ArrayList
+					arrayFriends.add(linkText + " (" + theHref +")"); // add value to ArrayList
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return arrayBoards; //<< return ArrayList from here
+			return arrayFriends; //<< return ArrayList from here
 
 
 		} 
@@ -106,7 +92,7 @@ public class FriendsActivity extends Activity {
 
 
 			ListView _listview = (ListView) findViewById(R.id.listView1);
-			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(FriendsActivity.this, android.R.layout.simple_list_item_1, arrayBoards);
+			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(FriendsActivity.this, android.R.layout.simple_list_item_1, arrayFriends);
 			
 			_listview.setAdapter(_adapter);
 			Log.i("ListView", "lv populated");
