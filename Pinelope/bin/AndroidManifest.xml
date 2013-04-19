@@ -25,12 +25,12 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name=".FriendsActivity"
+            android:name="com.justshan.pinelope.FriendsActivity"
             android:theme="@style/MyTheme" >
         
         </activity>
         <activity 
-            android:name=".UserBoards"
+            android:name="com.justshan.pinelope.UserBoards"
             android:theme="@style/MyTheme" >
         
         </activity>

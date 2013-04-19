@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -82,7 +83,7 @@ public class UserBoards extends Activity {
 
 
 			ListView _listview = (ListView) findViewById(R.id.boardsView);
-			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(UserBoards.this, android.R.layout.simple_list_item_1, arrayBoards);
+			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(UserBoards.this, R.layout.list_item2, R.id.text1, arrayBoards);
 			
 			_listview.setAdapter(_adapter);
 			Log.i("ListView", "lv populated");
@@ -118,6 +119,13 @@ public class UserBoards extends Activity {
 
 			
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.pinelope, menu);
+		return true;
 	}
 
 }

@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -92,7 +93,7 @@ public class FriendsActivity extends Activity {
 
 
 			ListView _listview = (ListView) findViewById(R.id.listView1);
-			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(FriendsActivity.this, android.R.layout.simple_list_item_1, arrayFriends);
+			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(FriendsActivity.this, R.layout.list_friends, R.id.textFriend, arrayFriends);
 			
 			_listview.setAdapter(_adapter);
 			Log.i("ListView", "lv populated");
@@ -131,6 +132,13 @@ public class FriendsActivity extends Activity {
 
 			
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.pinelope, menu);
+		return true;
 	}
 }
 
