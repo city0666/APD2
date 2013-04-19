@@ -34,6 +34,16 @@
             android:theme="@style/MyTheme" >
         
         </activity>
+        <activity 
+            android:name="com.justshan.pinelope.PinsPage"
+            android:theme="@style/MyTheme" >
+        
+        </activity>
+        <activity 
+            android:name="com.justshan.pinelope.PinDetail"
+            android:theme="@style/MyTheme" >
+        
+        </activity>
     </application>
 
 </manifest>

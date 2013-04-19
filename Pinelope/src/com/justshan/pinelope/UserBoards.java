@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -88,34 +89,22 @@ public class UserBoards extends Activity {
 			_listview.setAdapter(_adapter);
 			Log.i("ListView", "lv populated");
 
-//			_listview.setOnItemClickListener(new OnItemClickListener() {
-//				
-//				@Override
-//				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
-//
-//					
-//					if(position > 0){
-//						listItem = parent.getItemAtPosition(position).toString();
-//							String myParent = parent.getItemAtPosition(position).toString();	
-//							
-//							myParent = myParent.substring(myParent.indexOf("(") + 1);
-//							myParent = myParent.substring(0, myParent.indexOf(")"));
-//
-//							System.out.println(myParent);
-//							String theURL = ("http://m.pinterest.com/" + myParent);
-//							Log.i("URL", theURL);
-//							
-////							Intent intent = new Intent(FriendsActivity.this, UserBoards.class);
-////							//This is the information that will be sent.
-////							intent.putExtra("BOARDS", theURL);
-////							startActivity(intent);
-//							
-//
-//							Log.i("name", parent.getItemAtPosition(position).toString());
-//					}
-//
-//				}
-//			});
+			_listview.setOnItemClickListener(new OnItemClickListener() {
+				
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
+
+					
+					
+							
+							Intent intent = new Intent(UserBoards.this, PinsPage.class);
+							//This is the information that will be sent.
+							startActivity(intent);
+							
+
+					
+				}
+			});
 
 			
 		}

@@ -27,31 +27,37 @@ public final class R {
         public static final int custom_button=0x7f020003;
         public static final int ic_launcher=0x7f020004;
         public static final int icon=0x7f020005;
-        public static final int pinelope=0x7f020006;
-        public static final int pinny=0x7f020007;
-        public static final int social_person=0x7f020008;
-        public static final int stripebg=0x7f020009;
+        public static final int pindetail=0x7f020006;
+        public static final int pinelope=0x7f020007;
+        public static final int pinny=0x7f020008;
+        public static final int pinspage=0x7f020009;
+        public static final int social_person=0x7f02000a;
+        public static final int stripebg=0x7f02000b;
     }
     public static final class id {
         public static final int boardsView=0x7f080000;
         public static final int icon=0x7f080005;
-        public static final int imageView1=0x7f080007;
+        public static final int imageDetail=0x7f080007;
+        public static final int imagePins=0x7f080008;
+        public static final int imageView1=0x7f080009;
         public static final int listView1=0x7f080002;
         public static final int pinny=0x7f080003;
-        public static final int pinuser=0x7f080008;
-        public static final int pinusergo=0x7f080009;
-        public static final int shoplist=0x7f08000a;
+        public static final int pinuser=0x7f08000a;
+        public static final int pinusergo=0x7f08000b;
+        public static final int shoplist=0x7f08000c;
         public static final int text1=0x7f080006;
         public static final int textFriend=0x7f080004;
         public static final int tvWho=0x7f080001;
-        public static final int user=0x7f08000b;
+        public static final int user=0x7f08000d;
     }
     public static final class layout {
         public static final int boards=0x7f030000;
         public static final int friends=0x7f030001;
         public static final int list_friends=0x7f030002;
         public static final int list_item2=0x7f030003;
-        public static final int userentry=0x7f030004;
+        public static final int pindetail=0x7f030004;
+        public static final int pinspage=0x7f030005;
+        public static final int userentry=0x7f030006;
     }
     public static final class menu {
         public static final int pinelope=0x7f070000;
