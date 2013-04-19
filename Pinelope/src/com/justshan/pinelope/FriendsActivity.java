@@ -103,7 +103,7 @@ public class FriendsActivity extends Activity {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
 
 					
-					if(position > 0){
+					
 						listItem = parent.getItemAtPosition(position).toString();
 							String myParent = parent.getItemAtPosition(position).toString();	
 							
@@ -124,7 +124,7 @@ public class FriendsActivity extends Activity {
 //							boardWebView.loadUrl(theURL);
 
 							Log.i("name", parent.getItemAtPosition(position).toString());
-					}
+					
 
 				}
 			});
