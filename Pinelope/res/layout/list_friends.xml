@@ -11,13 +11,23 @@
 		android:src="@drawable/pinny" />
 
      <TextView
-         android:id="@+id/textFriend"
+         android:id="@+id/text1"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="18sp"
+         android:textSize="16sp"
+         android:textColor="#eb7368"
          android:layout_gravity="center_vertical"
-         android:textColor="#14a48d"
          android:paddingBottom="5dp"
-         android:paddingLeft="5dp" />
-
+         android:paddingLeft="5dp"
+         android:text="test" />
+     <TextView
+         android:id="@+id/text2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="16sp"
+         android:textColor="#eb7368"
+         android:layout_gravity="center_vertical"
+         android:paddingBottom="5dp"
+         android:paddingLeft="5dp"
+         android:text="test2" />
 </LinearLayout>
