@@ -75,7 +75,8 @@ public class FriendsActivity extends Activity {
 
 		} 
 
-		protected void onPostExecute(String result) { 
+		@Override
+		protected void onPostExecute(List<HashMap<String, String>> result) { 
 
 			String[] from = new String[] {"col_1", "col_2"};
 	        int[] to = new int[] { R.id.text1, R.id.text2 };
