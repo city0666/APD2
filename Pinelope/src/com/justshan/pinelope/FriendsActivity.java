@@ -84,7 +84,7 @@ public class FriendsActivity extends Activity {
 	        int[] to = new int[] { R.id.text1, R.id.text2 };
 	        ListView _listview = (ListView)findViewById(R.id.listView1);
 
-	        SimpleAdapter _adapter = new SimpleAdapter(FriendsActivity.this, friendData, R.layout.friends, from, to);
+	        SimpleAdapter _adapter = new SimpleAdapter(FriendsActivity.this, friendData, R.layout.list_friends, from, to);
 	        _listview.setAdapter(_adapter);
 		}
 	}
