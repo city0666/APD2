@@ -36,19 +36,22 @@ public final class R {
     }
     public static final class id {
         public static final int boardsView=0x7f080000;
+        public static final int desc=0x7f080008;
         public static final int icon=0x7f080006;
         public static final int imageDetail=0x7f080007;
-        public static final int imagePins=0x7f080008;
-        public static final int imageView1=0x7f080009;
+        public static final int imageView1=0x7f08000c;
         public static final int listView1=0x7f080002;
+        public static final int openWeb=0x7f080009;
         public static final int pinny=0x7f080003;
-        public static final int pinuser=0x7f08000a;
-        public static final int pinusergo=0x7f08000b;
-        public static final int shoplist=0x7f08000c;
+        public static final int pinuser=0x7f08000d;
+        public static final int pinusergo=0x7f08000e;
+        public static final int savePin=0x7f08000a;
+        public static final int shopWho=0x7f08000b;
+        public static final int shoplist=0x7f08000f;
         public static final int text1=0x7f080004;
         public static final int text2=0x7f080005;
         public static final int tvWho=0x7f080001;
-        public static final int user=0x7f08000d;
+        public static final int user=0x7f080010;
     }
     public static final class layout {
         public static final int boards=0x7f030000;

@@ -8,8 +8,26 @@
         android:id="@+id/imageDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pindetail"
+        
         android:layout_gravity="center" />
+    <TextView 
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Pin Description" />
+    <Button
+        android:id="@+id/openWeb"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Open in Browser" />
+    <Button
+        android:id="@+id/savePin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Save to Shopping List" />
     
     
 
