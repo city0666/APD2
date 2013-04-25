@@ -3,14 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <TextView 
-        android:id="@+id/shopWho"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="User"/>
-    <GridView >
-        
-    </GridView>
+   <ListView 
+       android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+       
+   </ListView>
 
 </LinearLayout>
