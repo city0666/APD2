@@ -95,10 +95,18 @@ public class UserBoards extends Activity {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
 
 					
+					String myParent = parent.getItemAtPosition(position).toString().toLowerCase().replaceAll("[^a-zA-Z0-9 ]+","");	
+					myParent = myParent.replace(' ', '-');
+					//String cutString = myParent.substring(0, 49);
+					myParent = myParent.substring(0, Math.min(myParent.length(), 49));
+
+					System.out.println(myParent);
+					String theURL = ("https://api.pinterest.com/v3/pidgets/boards/" + getIntent().getExtras().getString("USERNAME")+ "/" + myParent + "/pins/");
+					Log.i("URL", theURL);
 					
-							
 							Intent intent = new Intent(UserBoards.this, PinsPage.class);
 							//This is the information that will be sent.
+							intent.putExtra("PINS", theURL);
 							startActivity(intent);
 							
 
