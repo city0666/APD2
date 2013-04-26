@@ -45,6 +45,11 @@
             android:theme="@style/MyTheme" >
         
         </activity>
+        <activity 
+            android:name="com.justshan.pinelope.ShoppingList"
+            android:theme="@style/MyTheme" >
+        
+        </activity>
     </application>
 
 </manifest>

@@ -152,6 +152,12 @@ public class FriendsActivity extends Activity {
 	         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 	         startActivity(intent);   
 	        break;
+	    case R.id.shoplist:
+	    	Intent intentList = new Intent(this, ShoppingList.class);            
+	    	intentList.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intentList);   
+	        break;
+	        
     	}
 	    return true;
 	}
