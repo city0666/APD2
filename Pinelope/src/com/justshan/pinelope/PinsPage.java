@@ -126,7 +126,7 @@ public class PinsPage extends Activity {
 						String pinnerQuotes = pinner.replaceAll("\"", "");
 						String curly = pinnerQuotes.replaceAll("\\}", "");
 						String pinnerName = curly.split("full_name:")[1];
-						Log.i("pinnerName", pinnerName);
+						//Log.i("pinnerName", pinnerName);
 						
 
 						
@@ -134,13 +134,14 @@ public class PinsPage extends Activity {
 						map.put("desc", s.getString("description"));
 						map.put("img",  myIMG3);
 					    map.put("url", s.getString("link"));
+					    map.put("name", pinnerName);
 
 					    //Log.i("IMG", s.getString("images"));
 					    _pinData.add(map);
 				        
 					    // List adapter is set
 				        _adapter = new SimpleAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
-				                new String[] {"img","desc", "url"},
+				                new String[] {"img","desc", "url", "name"},
 				                new int[] {R.id.text1});
 				        _listview.setAdapter(_adapter);
 				        
@@ -155,6 +156,7 @@ public class PinsPage extends Activity {
 				        			intent.putExtra("DetailDesc", o.get("desc"));
 				        			intent.putExtra("DetailIMG", o.get("img"));
 				        			intent.putExtra("DetailUrl", o.get("url"));
+				        			intent.putExtra("DetailName", o.get("name"));
 				        			startActivity(intent);
 				        		
 							}

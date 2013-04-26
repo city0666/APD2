@@ -1,6 +1,8 @@
 package com.justshan.pinelope;
 
 
+import com.parse.ParseObject;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -19,6 +21,7 @@ public class PinDetail extends Activity {
 	String _passedDesc;
 	String _passedIMG;
 	String _passedUrl;
+	String _passedName;
 	TextView tv;
 	
 	
@@ -32,6 +35,8 @@ public class PinDetail extends Activity {
 		_passedDesc = i.getStringExtra("DetailDesc");
 		_passedIMG = i.getStringExtra("DetailIMG");
 		_passedUrl = i.getStringExtra("DetailUrl");
+		_passedName = i.getStringExtra("DetailName");
+		
 		
 		Log.i("URLNEW", _passedUrl);
 		
@@ -56,6 +61,25 @@ public class PinDetail extends Activity {
             			 internetIntent.setComponent(new ComponentName("com.android.browser","com.android.browser.BrowserActivity"));
             			 internetIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             			 startActivity(internetIntent);
+              }
+             }
+         );
+        
+        Button btSave = (Button) findViewById(R.id.savePin);
+        btSave.setOnClickListener(new OnClickListener() {
+        	
+        	/* This is my Implicit Intent. When you click on the button it 
+        	 * will take you to a browser and load up the URL. 
+        	 * In this case, the URL is passed from my main activity */
+             public void onClick(View v) {
+            	 
+            	ParseObject savedPin = new ParseObject("SavedPin");
+            	savedPin.put("Name", _passedName );
+            	savedPin.put("Desc", _passedDesc );
+            	savedPin.put("IMG", _passedIMG );
+            	savedPin.put("Url", _passedUrl );
+            	savedPin.saveInBackground();
+ 				
               }
              }
          );
