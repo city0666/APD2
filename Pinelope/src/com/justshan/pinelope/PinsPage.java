@@ -107,7 +107,7 @@ public class PinsPage extends Activity {
 	    				Toast toast = Toast.makeText(getApplicationContext(), "Sorry! No pins found.", Toast.LENGTH_SHORT);
 						toast.show();
 	    			}else{
-			        Log.i("THE RESULTS", _results.toString());
+			        //Log.i("THE RESULTS", _results.toString());
 			        
 					_pinData = new ArrayList<Map<String, String>>();
 					
@@ -115,16 +115,25 @@ public class PinsPage extends Activity {
 				    	
 						JSONObject s = _results.getJSONObject(i);
 						Map<String, String> map = new HashMap<String, String>(2);
+
+						String myIMG = s.getString("images");
+						String quotes = myIMG.replaceAll("\"", "");
+						String slashes = quotes.replaceAll("\\\\", "");					
+						String myIMG2 = slashes.split("url:")[1];
+						String myIMG3 = myIMG2.split(",height")[0];
+						//Log.i("myIMG3", myIMG3);
+						
 						
 						map.put("desc", s.getString("description"));
-						map.put("img",  s.getString("images"));
+						map.put("img",  myIMG3);
 					    map.put("url", s.getString("link"));
 
+					    //Log.i("IMG", s.getString("images"));
 					    _pinData.add(map);
 				        
 					    // List adapter is set
 				        _adapter = new SimpleAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
-				                new String[] {"desc","img", "url"},
+				                new String[] {"img","desc", "url"},
 				                new int[] {R.id.text1});
 				        _listview.setAdapter(_adapter);
 				        
@@ -136,8 +145,8 @@ public class PinsPage extends Activity {
 				        			// Info is set to the details view via EXPLICIT intent
 				        			Intent intent = new Intent(getApplicationContext(), PinDetail.class);
 				        			intent.putExtra("DetailData", o.toString());
-				        			intent.putExtra("DetailName", o.get("desc"));
-				        			intent.putExtra("DetailPrice", o.get("img"));
+				        			intent.putExtra("DetailDesc", o.get("desc"));
+				        			intent.putExtra("DetailIMG", o.get("img"));
 				        			intent.putExtra("DetailUrl", o.get("url"));
 				        			startActivity(intent);
 				        		
