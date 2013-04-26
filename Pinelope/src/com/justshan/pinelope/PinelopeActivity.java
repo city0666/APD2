@@ -23,6 +23,7 @@ public class PinelopeActivity extends Activity {
 
 	EditText et;
 	String theuser;
+	Button B;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +51,19 @@ public class PinelopeActivity extends Activity {
 		            
 		        } else {
 		            Log.d("score", "Error: " + e.getMessage());
+		            
+		            //need to work on this in the final week.
+		            //et.setVisibility(View.VISIBLE);
+		    		//B.setVisibility(View.VISIBLE);
 		        }
 		    }
 		});
 		    
 		
-		Button B = (Button) findViewById(R.id.pinusergo);
+		B = (Button) findViewById(R.id.pinusergo);
+		//B.setVisibility(View.GONE);
 		et = (EditText) findViewById(R.id.pinuser);
+		//et.setVisibility(View.GONE);
 		
 		B.setOnClickListener(new OnClickListener() {
 
