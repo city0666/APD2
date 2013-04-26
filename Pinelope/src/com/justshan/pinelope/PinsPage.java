@@ -12,10 +12,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,9 +26,12 @@ import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -40,6 +45,7 @@ public class PinsPage extends Activity {
 	Context _context;
 	List<Map<String, String>> _pinData;
 	SimpleAdapter _adapter;
+	DisplayImageOptions options;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +117,7 @@ public class PinsPage extends Activity {
 			        
 					_pinData = new ArrayList<Map<String, String>>();
 					
+					
 				    for(int i=0;i<_results.length();i++){	
 				    	
 						JSONObject s = _results.getJSONObject(i);
@@ -140,8 +147,25 @@ public class PinsPage extends Activity {
 					    _pinData.add(map);
 				        
 					    // List adapter is set
+					    
+//					    options = new DisplayImageOptions.Builder()
+//						.showStubImage(R.drawable.ic_stub)
+//						.showImageForEmptyUri(R.drawable.ic_empty)
+//						.showImageOnFail(R.drawable.ic_error)
+//						.cacheInMemory()
+//						.cacheOnDisc()
+//						.bitmapConfig(Bitmap.Config.RGB_565)
+//						.build();
+
+					    
+					    
+//					    GridView listView = (GridView) findViewById(R.id.gridview);
+//						((GridView) listView).setAdapter(new ImageAdapter(PinsPage.this, _pinData, R.layout.item_grid_image,
+//				                new String[] {"img","desc", "url", "name"},
+//				                new int[] {R.id.image}));
+//						
 				        _adapter = new SimpleAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
-				                new String[] {"img","desc", "url", "name"},
+				                new String[] {"desc", "img", "url", "name"},
 				                new int[] {R.id.text1});
 				        _listview.setAdapter(_adapter);
 				        
@@ -173,7 +197,36 @@ public class PinsPage extends Activity {
 	};
 	
 	
-
+//	public class ImageAdapter extends BaseAdapter {
+//		@Override
+//		public int getCount() {
+//			return _pinData.size();
+//		}
+//
+//		@Override
+//		public Object getItem(int position) {
+//			return null;
+//		}
+//
+//		@Override
+//		public long getItemId(int position) {
+//			return position;
+//		}
+//
+//		@Override
+//		public View getView(int position, View convertView, ViewGroup parent) {
+//			final ImageView imageView;
+//			if (convertView == null) {
+//				imageView = (ImageView) getLayoutInflater().inflate(R.layout.item_grid_image, parent, false);
+//			} else {
+//				imageView = (ImageView) convertView;
+//			}
+//
+//			//imageLoader.displayImage(_pinData[position], imageView, options);
+//
+//			return imageView;
+//		}
+//	}
 	
 	
 	

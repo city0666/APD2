@@ -1,18 +1,25 @@
 package com.justshan.pinelope;
 
 
+import java.io.InputStream;
+
 import com.parse.ParseObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PinDetail extends Activity {
@@ -23,6 +30,9 @@ public class PinDetail extends Activity {
 	String _passedUrl;
 	String _passedName;
 	TextView tv;
+	ImageView my_img;
+    Bitmap mybitmap;
+    ProgressDialog pd;
 	
 	
 	@Override
@@ -41,7 +51,7 @@ public class PinDetail extends Activity {
 		Log.i("URLNEW", _passedUrl);
 		
 		
-		
+		new DisplayImageFromURL((ImageView) findViewById(R.id.imageDetail)).execute(_passedIMG);
 		
 		tv = (TextView) findViewById(R.id.desc);
 		tv.setText(_passedDesc);
@@ -85,6 +95,40 @@ public class PinDetail extends Activity {
          );
 		
 	}
+	
+	private class DisplayImageFromURL extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            pd = new ProgressDialog(PinDetail.this);
+            pd.setMessage("Loading...");
+            pd.show();
+        }
+        public DisplayImageFromURL(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+
+            return mIcon11;
+
+        }
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+            pd.dismiss();
+        }
+    }
+
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
