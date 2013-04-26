@@ -9,14 +9,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -142,4 +143,17 @@ public class FriendsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.pinelope, menu);
 		return true;
 	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+	    switch(item.getItemId()) {
+	    case R.id.user:
+	        //click on about item
+	    	Intent intent = new Intent(this, PinelopeActivity.class);            
+	         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intent);   
+	        break;
+    	}
+	    return true;
+	}
+	
 }
