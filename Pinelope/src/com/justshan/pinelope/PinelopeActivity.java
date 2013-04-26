@@ -1,5 +1,8 @@
 package com.justshan.pinelope;
 
+import java.util.List;
+
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
@@ -26,20 +29,22 @@ public class PinelopeActivity extends Activity {
 		setContentView(R.layout.userentry);
 		
 		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk"); 
+		
+		ParseObject userObject = new ParseObject("UserObject");
 		ParseQuery query = new ParseQuery("UserObject");
-		query.getInBackground("username", new GetCallback() {
+		query.whereEqualTo("pinterest", "Pinterest");
+		query.setLimit(1);
+		query.findInBackground(new FindCallback() {
 			
-			@Override
-			public void done(ParseObject object, ParseException e) {
-				// TODO Auto-generated method stub
-				if (e == null) {
-				      Log.i("works", "works!!!");
-				    } else {
-				      // something went wrong
-				    	Log.i("bad", "bad!!!");
-				    }
-			}
+			public void done(List<ParseObject> getInfo, ParseException e) {
+		        if (e == null) {
+		            Log.d("username", getInfo.size() + "users" );
+		        } else {
+		            Log.d("score", "Error: " + e.getMessage());
+		        }
+		    }
 		});
+		    
 		
 		Button B = (Button) findViewById(R.id.pinusergo);
 		et = (EditText) findViewById(R.id.pinuser);
@@ -51,6 +56,7 @@ public class PinelopeActivity extends Activity {
 				
 				ParseObject userObject = new ParseObject("UserObject");
 				userObject.put("username", et.getText().toString() );
+				userObject.put("pinterest", "Pinterest" );
 				userObject.saveInBackground();
 				// Sending from this class to the "second" view/class
 				Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
