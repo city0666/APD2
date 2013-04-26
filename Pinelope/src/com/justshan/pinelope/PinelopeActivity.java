@@ -33,21 +33,22 @@ public class PinelopeActivity extends Activity {
 		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk"); 
 		
 		ParseQuery query = new ParseQuery("UserObject");
+	
 		query.whereEqualTo("pinterest", "Pinterest");
-		query.setLimit(1);
+    	//query.setLimit(1);
 		query.findInBackground(new FindCallback() {
 			
 			public void done(List<ParseObject> getInfo, ParseException e) {
 		        if (e == null) {
-		            Log.d("username", getInfo.size() + "users" );
 		            int line = 0;
 					ParseObject s = getInfo.get(line);
 					theuser = s.getString("username");
 					Log.i("USERNAME", theuser);
-					Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
-					//This is the information that will be sent.
-					intent.putExtra("USER", theuser);
-					startActivity(intent);
+						
+						Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
+						//This is the information that will be sent.
+						intent.putExtra("USER", theuser);
+						startActivity(intent);
 		            
 		        } else {
 		            Log.d("score", "Error: " + e.getMessage());

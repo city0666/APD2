@@ -122,6 +122,13 @@ public class PinsPage extends Activity {
 						String myIMG2 = slashes.split("url:")[1];
 						String myIMG3 = myIMG2.split(",height")[0];
 						//Log.i("myIMG3", myIMG3);
+						String pinner = s.getString("pinner");
+						String pinnerQuotes = pinner.replaceAll("\"", "");
+						String curly = pinnerQuotes.replaceAll("\\}", "");
+						String pinnerName = curly.split("full_name:")[1];
+						Log.i("pinnerName", pinnerName);
+						
+
 						
 						
 						map.put("desc", s.getString("description"));
