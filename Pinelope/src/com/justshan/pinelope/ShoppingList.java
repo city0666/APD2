@@ -5,17 +5,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.view.View.OnClickListener;
 
 public class ShoppingList extends Activity {
 
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pinspage);
+		setContentView(R.layout.shoplist);
 
-		//ImageView imgFavorite = (ImageView) findViewById(R.id.imagePins);
-		
+//		ImageView imgFavorite = (ImageView) findViewById(R.id.imagePins);
+//		imgFavorite.setClickable(true); 
+//		imgFavorite.setOnClickListener(new OnClickListener() {
+//		    @Override
+//		    public void onClick(View v) {
+//		    	Intent intent = new Intent(ShoppingList.this, PinDetail.class);
+//				//This is the information that will be sent.
+//				startActivity(intent);
+//		    }
+//		});
+
 	}
 	
 	@Override
