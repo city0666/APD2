@@ -25,6 +25,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -236,6 +237,23 @@ public class PinsPage extends Activity {
 		getMenuInflater().inflate(R.menu.pinelope, menu);
 		return true;
 	}
-
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+	    switch(item.getItemId()) {
+	    case R.id.user:
+	        //click on about item
+	    	Intent intent = new Intent(this, PinelopeActivity.class);            
+	         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intent);   
+	        break;
+	    case R.id.shoplist:
+	    	Intent intentList = new Intent(this, ShoppingList.class);            
+	    	intentList.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intentList);   
+	        break;
+	        
+    	}
+	    return true;
+	}
 
 }
