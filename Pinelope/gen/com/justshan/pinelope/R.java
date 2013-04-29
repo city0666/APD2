@@ -39,21 +39,23 @@ containing a value of this type.
     public static final class drawable {
         public static final int app_background=0x7f020000;
         public static final int bg1=0x7f020001;
-        public static final int collections_view_as_list=0x7f020002;
-        public static final int content_remove=0x7f020003;
-        public static final int custom_button=0x7f020004;
-        public static final int ic_empty=0x7f020005;
-        public static final int ic_error=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int ic_stub=0x7f020008;
-        public static final int icon=0x7f020009;
-        public static final int list=0x7f02000a;
-        public static final int pindetail=0x7f02000b;
-        public static final int pinelope=0x7f02000c;
-        public static final int pinny=0x7f02000d;
-        public static final int pinspage=0x7f02000e;
-        public static final int social_person=0x7f02000f;
-        public static final int stripebg=0x7f020010;
+        public static final int border=0x7f020002;
+        public static final int collections_view_as_list=0x7f020003;
+        public static final int content_remove=0x7f020004;
+        public static final int custom_button=0x7f020005;
+        public static final int custom_button_2=0x7f020006;
+        public static final int ic_empty=0x7f020007;
+        public static final int ic_error=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int ic_stub=0x7f02000a;
+        public static final int icon=0x7f02000b;
+        public static final int list=0x7f02000c;
+        public static final int pindetail=0x7f02000d;
+        public static final int pinelope=0x7f02000e;
+        public static final int pinny=0x7f02000f;
+        public static final int pinspage=0x7f020010;
+        public static final int social_person=0x7f020011;
+        public static final int stripebg=0x7f020012;
     }
     public static final class id {
         public static final int boardsView=0x7f080000;
