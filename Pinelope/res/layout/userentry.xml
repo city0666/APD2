@@ -11,11 +11,6 @@
 		android:textColor="#f17945"
 		android:text="Welcome to Pinelope, your personal shopping assistant. Pinelope will help you find the perfect gift for your friends via Pinterest."
 		android:paddingBottom="10dp" />
-	<TextView android:layout_width="290dp"
-	    android:layout_height="wrap_content" android:layout_gravity="center"
-	    android:textColor="#5DB8A7"
-	    android:text="Please create an account using your Pinteret Username!"
-	    android:paddingBottom="10dp" />
 	<LinearLayout android:layout_gravity="center"
 		android:layout_width="290dp" android:layout_height="wrap_content"
 		android:orientation="vertical" android:background="@drawable/border"

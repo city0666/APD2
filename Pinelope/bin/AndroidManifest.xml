@@ -52,7 +52,7 @@
         </activity>
         <activity 
             android:name="com.justshan.pinelope.SignUp"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyThemeNoAction" >
         
         </activity>
     </application>

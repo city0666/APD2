@@ -18,6 +18,7 @@ public class SignUp extends Activity {
 	EditText usernameSU;
 	EditText passwordSU;
 	Button signUp;
+	Button cancel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class SignUp extends Activity {
 		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk"); 
 
 		signUp = (Button) findViewById(R.id.pinusersignup);
+		cancel = (Button) findViewById(R.id.cancel);
 		//B.setVisibility(View.GONE);
 		usernameSU = (EditText) findViewById(R.id.signuppinuser);
 		passwordSU = (EditText) findViewById(R.id.signupuserpass);
@@ -51,7 +53,7 @@ public class SignUp extends Activity {
 
 							Intent intent = new Intent(SignUp.this, PinelopeActivity.class);
 							//This is the information that will be sent.
-							intent.putExtra("USERNAME", usernameSU.getText().toString());
+							//intent.putExtra("USERNAME", usernameSU.getText().toString());
 							startActivity(intent);
 						} else {
 							// Sign up didn't succeed. Look at the ParseException
@@ -59,6 +61,21 @@ public class SignUp extends Activity {
 						}						
 					}
 				});
+
+			}
+		});
+
+		cancel.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+
+				Intent intent = new Intent(SignUp.this, PinelopeActivity.class);
+				//This is the information that will be sent.
+				//intent.putExtra("USERNAME", usernameSU.getText().toString());
+				startActivity(intent);
+
 
 			}
 		});
