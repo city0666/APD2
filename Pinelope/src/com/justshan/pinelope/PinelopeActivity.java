@@ -1,14 +1,9 @@
 package com.justshan.pinelope;
 
-import java.util.List;
-
-import com.parse.FindCallback;
-import com.parse.GetCallback;
+import com.parse.LogInCallback;
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,75 +16,70 @@ import android.view.View.OnClickListener;
 
 public class PinelopeActivity extends Activity {
 
-	EditText et;
+	EditText username;
+	EditText password;
+	EditText pinterestU;
 	String theuser;
-	Button B;
-	
+	Button login;
+	Button signup;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.userentry);
-		
+
 		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk"); 
+
+		login = (Button) findViewById(R.id.pinusergo);
+		username = (EditText) findViewById(R.id.pinuser);
+		password = (EditText) findViewById(R.id.userpass);
+		signup = (Button) findViewById(R.id.pinsignup);
+
 		
-		ParseQuery query = new ParseQuery("UserObject");
-	
-		query.whereEqualTo("pinterest", "Pinterest");
-    	//query.setLimit(1);
-		query.findInBackground(new FindCallback() {
+		
+		
+		login.setOnClickListener(new OnClickListener() {
 			
-			public void done(List<ParseObject> getInfo, ParseException e) {
-		        if (e == null) {
-		            int line = 0;
-					ParseObject s = getInfo.get(line);
-					theuser = s.getString("username");
-					Log.i("USERNAME", theuser);
-						
-						Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
-						//This is the information that will be sent.
-						intent.putExtra("USER", theuser);
-						startActivity(intent);
-		            
-		        } else {
-		            Log.d("score", "Error: " + e.getMessage());
-		            
-		            //need to work on this in the final week.
-		            //et.setVisibility(View.VISIBLE);
-		    		//B.setVisibility(View.VISIBLE);
-		        }
-		    }
+
+			@Override
+			public void onClick(View v) {
+
+				String theUsername = username.getText().toString();
+				String thePassword = password.getText().toString();
+				
+				ParseUser.logInInBackground(theUsername, thePassword, new LogInCallback() {
+					
+					@Override
+					public void done(ParseUser user, ParseException e) {
+					    if (user != null) {
+					    	Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
+							//This is the information that will be sent.
+							intent.putExtra("USER", username.getText().toString());
+							startActivity(intent);
+					    	
+					    } else {
+					      // Signup failed. Look at the ParseException to see what happened.
+					    	Log.i("NO", "NOT WORKING");
+					    }
+					  }
+					
+				});				
+			}
 		});
-		    
 		
-		B = (Button) findViewById(R.id.pinusergo);
-		//B.setVisibility(View.GONE);
-		et = (EditText) findViewById(R.id.pinuser);
-		//et.setVisibility(View.GONE);
-		
-		B.setOnClickListener(new OnClickListener() {
+		signup.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				
-				ParseObject userObject = new ParseObject("UserObject");
-				userObject.put("username", et.getText().toString() );
-				userObject.put("pinterest", "Pinterest" );
-				userObject.saveInBackground();
-				// Sending from this class to the "second" view/class
-				Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
+				Intent intent = new Intent(PinelopeActivity.this, SignUp.class);
 				//This is the information that will be sent.
-				intent.putExtra("USER", et.getText().toString());
 				startActivity(intent);
+
 			}
 		});
 		
-	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.pinelope, menu);
-//		return true;
-//	}
+	}
 
 }

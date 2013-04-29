@@ -17,24 +17,38 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="#f17945"
-        android:text="Welcome to Pinelope, your personal shopping assistant. Pinelope will help you find the perfect gift for your friends via Pinterest."
+        android:text="Welcome to Pinelope, your personal shopping assistant. Pinelope will help you find the perfect gift for your friends via Pinterest. Please Create an Account!"
         android:padding="10dp"/>
     <LinearLayout 
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10px"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <EditText 
             android:id="@+id/pinuser"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="Username"/>
+            android:hint="Pinterest Username"/>
+         <EditText 
+            android:id="@+id/userpass"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Password"/>
+       
         <Button
             android:id="@+id/pinusergo" 
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Save"
+            android:textColor="#ffffff"
+            android:background="@drawable/custom_button"
+            android:textSize="16sp"/>
+        <Button
+            android:id="@+id/pinsignup" 
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
             android:textColor="#ffffff"
             android:background="@drawable/custom_button"
             android:textSize="16sp"/>

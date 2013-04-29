@@ -9,6 +9,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.parse.Parse;
+import com.parse.ParseUser;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,6 +42,8 @@ public class FriendsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friends);
+		
+		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk");
 
 		TextView tv = (TextView) findViewById(R.id.tvWho);
 		tv.setText("Hello, " + getIntent().getExtras().getString("USER") + "! Who would you like to shop for today?");
@@ -156,6 +161,13 @@ public class FriendsActivity extends Activity {
 	    	Intent intentList = new Intent(this, ShoppingList.class);            
 	    	intentList.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 	         startActivity(intentList);   
+	        break;
+	    case R.id.logout:
+	    	ParseUser.logOut();
+	    	ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+	    	Intent intentLogout = new Intent(this, PinelopeActivity.class);            
+	    	intentLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intentLogout);   
 	        break;
 	        
     	}

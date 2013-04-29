@@ -17,23 +17,13 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -129,12 +119,10 @@ public class PinsPage extends Activity {
 						String slashes = quotes.replaceAll("\\\\", "");					
 						String myIMG2 = slashes.split("url:")[1];
 						String myIMG3 = myIMG2.split(",height")[0];
-						//Log.i("myIMG3", myIMG3);
 						String pinner = s.getString("pinner");
 						String pinnerQuotes = pinner.replaceAll("\"", "");
 						String curly = pinnerQuotes.replaceAll("\\}", "");
 						String pinnerName = curly.split("full_name:")[1];
-						//Log.i("pinnerName", pinnerName);
 						
 
 						
@@ -144,38 +132,20 @@ public class PinsPage extends Activity {
 					    map.put("url", s.getString("link"));
 					    map.put("name", pinnerName);
 
-					    //Log.i("IMG", s.getString("images"));
 					    _pinData.add(map);
 				        
-					    // List adapter is set
-					    
-//					    options = new DisplayImageOptions.Builder()
-//						.showStubImage(R.drawable.ic_stub)
-//						.showImageForEmptyUri(R.drawable.ic_empty)
-//						.showImageOnFail(R.drawable.ic_error)
-//						.cacheInMemory()
-//						.cacheOnDisc()
-//						.bitmapConfig(Bitmap.Config.RGB_565)
-//						.build();
 
-					    
-					    
-//					    GridView listView = (GridView) findViewById(R.id.gridview);
-//						((GridView) listView).setAdapter(new ImageAdapter(PinsPage.this, _pinData, R.layout.item_grid_image,
-//				                new String[] {"img","desc", "url", "name"},
-//				                new int[] {R.id.image}));
-//						
 				        _adapter = new SimpleAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
 				                new String[] {"desc", "img", "url", "name"},
 				                new int[] {R.id.text1});
 				        _listview.setAdapter(_adapter);
 				        
 				        _listview.setOnItemClickListener(new OnItemClickListener() {
-				        	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {        		
+				        	@Override
+							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {        		
 				        		@SuppressWarnings("unchecked")
 								HashMap<String, String> o = (HashMap<String, String>) _listview.getItemAtPosition(position);
 				       
-				        			// Info is set to the details view via EXPLICIT intent
 				        			Intent intent = new Intent(getApplicationContext(), PinDetail.class);
 				        			intent.putExtra("DetailData", o.toString());
 				        			intent.putExtra("DetailDesc", o.get("desc"));
