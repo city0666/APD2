@@ -16,7 +16,7 @@ import android.view.View.OnClickListener;
 
 public class PinelopeActivity extends Activity {
 
-	EditText username;
+	EditText usernameU;
 	EditText password;
 	EditText pinterestU;
 	String theuser;
@@ -31,11 +31,21 @@ public class PinelopeActivity extends Activity {
 		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk"); 
 
 		login = (Button) findViewById(R.id.pinusergo);
-		username = (EditText) findViewById(R.id.pinuser);
+		usernameU = (EditText) findViewById(R.id.pinuser);
 		password = (EditText) findViewById(R.id.userpass);
 		signup = (Button) findViewById(R.id.pinsignup);
 
-		
+		ParseUser currentUser = ParseUser.getCurrentUser();
+		if (currentUser != null) {
+			String myuser = currentUser.getUsername();
+		  // do stuff with the user
+			Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
+			//This is the information that will be sent.
+			intent.putExtra("USER", myuser);
+			startActivity(intent);
+		} else {
+		  // show the signup or login screen
+		}
 		
 		
 		login.setOnClickListener(new OnClickListener() {
@@ -44,7 +54,7 @@ public class PinelopeActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				String theUsername = username.getText().toString();
+				String theUsername = usernameU.getText().toString();
 				String thePassword = password.getText().toString();
 				
 				ParseUser.logInInBackground(theUsername, thePassword, new LogInCallback() {
@@ -54,12 +64,13 @@ public class PinelopeActivity extends Activity {
 					    if (user != null) {
 					    	Intent intent = new Intent(PinelopeActivity.this, FriendsActivity.class);
 							//This is the information that will be sent.
-							intent.putExtra("USER", username.getText().toString());
+							intent.putExtra("USER", usernameU.getText().toString());
 							startActivity(intent);
 					    	
 					    } else {
 					      // Signup failed. Look at the ParseException to see what happened.
 					    	Log.i("NO", "NOT WORKING");
+					    	// need to add a Toast
 					    }
 					  }
 					
