@@ -65,7 +65,6 @@ containing a value of this type.
         public static final int icon=0x7f080007;
         public static final int image=0x7f080003;
         public static final int imageDetail=0x7f080008;
-        public static final int imagePins=0x7f08000e;
         public static final int imageView1=0x7f08000d;
         public static final int listView1=0x7f080002;
         public static final int logout=0x7f080019;
@@ -76,6 +75,7 @@ containing a value of this type.
         public static final int pinusergo=0x7f080015;
         public static final int pinusersignup=0x7f080011;
         public static final int savePin=0x7f08000b;
+        public static final int shopListView=0x7f08000e;
         public static final int shoplist=0x7f080017;
         public static final int signuppinuser=0x7f08000f;
         public static final int signupuserpass=0x7f080010;
