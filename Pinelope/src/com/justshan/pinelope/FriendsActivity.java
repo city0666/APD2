@@ -90,9 +90,6 @@ public class FriendsActivity extends Activity {
 
 		} 
 
-		/* (non-Javadoc)
-		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
-		 */
 		@Override
 		protected void onPostExecute(ArrayList<String> result) {        
 

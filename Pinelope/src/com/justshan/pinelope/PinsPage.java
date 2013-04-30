@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.origamilabs.library.views.StaggeredGridView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -31,19 +32,22 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class PinsPage extends Activity {
 	
-	ListView _listview;
+	GridView gridview;
+//	ListView _listview;
 	JSONArray _results;
 	Context _context;
 	List<Map<String, String>> _pinData;
 	SimpleAdapter _adapter;
-	DisplayImageOptions options;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pinspage);
+		setContentView(R.layout.pinspagegrid);
 		
-		_listview = (ListView) findViewById(R.id.listView1);
+		StaggeredGridView gridView = (StaggeredGridView) this
+                .findViewById(R.id.staggeredGridView1);
+		
+//		_listview = (ListView) findViewById(R.id.listView1);
 		
 //		ImageView imgFavorite = (ImageView) findViewById(R.id.imagePins);
 //		imgFavorite.setClickable(true); 
@@ -123,28 +127,31 @@ public class PinsPage extends Activity {
 						String pinnerQuotes = pinner.replaceAll("\"", "");
 						String curly = pinnerQuotes.replaceAll("\\}", "");
 						String pinnerName = curly.split("full_name:")[1];
-						
-
-						
-						
+												
 						map.put("desc", s.getString("description"));
 						map.put("img",  myIMG3);
 					    map.put("url", s.getString("link"));
 					    map.put("name", pinnerName);
 
 					    _pinData.add(map);
-				        
+					    
+					    StaggeredAdapter adapter = new StaggeredAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
+				                new String[] {"img", "desc", "url", "name"},
+				                new int[] {R.id.imageView1});
 
-				        _adapter = new SimpleAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
-				                new String[] {"desc", "img", "url", "name"},
-				                new int[] {R.id.text1});
-				        _listview.setAdapter(_adapter);
+				        gridview.setAdapter(adapter);
+				        adapter.notifyDataSetChanged();
+				    	
+//				        _adapter = new SimpleAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
+//				                new String[] {"desc", "img", "url", "name"},
+//				                new int[] {R.id.text1});
+//				        _listview.setAdapter(_adapter);
 				        
-				        _listview.setOnItemClickListener(new OnItemClickListener() {
+				        gridview.setOnItemClickListener(new OnItemClickListener() {
 				        	@Override
 							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {        		
 				        		@SuppressWarnings("unchecked")
-								HashMap<String, String> o = (HashMap<String, String>) _listview.getItemAtPosition(position);
+								HashMap<String, String> o = (HashMap<String, String>) gridview.getItemAtPosition(position);
 				       
 				        			Intent intent = new Intent(getApplicationContext(), PinDetail.class);
 				        			intent.putExtra("DetailData", o.toString());
@@ -166,38 +173,7 @@ public class PinsPage extends Activity {
 			}
 		
 	};
-	
-	
-//	public class ImageAdapter extends BaseAdapter {
-//		@Override
-//		public int getCount() {
-//			return _pinData.size();
-//		}
-//
-//		@Override
-//		public Object getItem(int position) {
-//			return null;
-//		}
-//
-//		@Override
-//		public long getItemId(int position) {
-//			return position;
-//		}
-//
-//		@Override
-//		public View getView(int position, View convertView, ViewGroup parent) {
-//			final ImageView imageView;
-//			if (convertView == null) {
-//				imageView = (ImageView) getLayoutInflater().inflate(R.layout.item_grid_image, parent, false);
-//			} else {
-//				imageView = (ImageView) convertView;
-//			}
-//
-//			//imageLoader.displayImage(_pinData[position], imageView, options);
-//
-//			return imageView;
-//		}
-//	}
+
 	
 	
 	
