@@ -85,6 +85,7 @@ public class PinDetail extends Activity {
              public void onClick(View v) {
             	 
             	ParseObject savedPin = new ParseObject("SavedPin");
+            	savedPin.put("column", "value" );
             	savedPin.put("Name", _passedName );
             	savedPin.put("Desc", _passedDesc );
             	savedPin.put("IMG", _passedIMG );

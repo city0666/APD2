@@ -12,7 +12,7 @@
     
     <item android:id="@+id/logout"
           android:title="User Settings"
-          android:icon="@drawable/content_remove"
+          android:icon="@drawable/logout"
           android:showAsAction="always" />
     
     

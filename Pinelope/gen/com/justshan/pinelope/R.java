@@ -51,12 +51,13 @@ containing a value of this type.
         public static final int ic_stub=0x7f02000b;
         public static final int icon=0x7f02000c;
         public static final int list=0x7f02000d;
-        public static final int pindetail=0x7f02000e;
-        public static final int pinelope=0x7f02000f;
-        public static final int pinny=0x7f020010;
-        public static final int pinspage=0x7f020011;
-        public static final int social_person=0x7f020012;
-        public static final int stripebg=0x7f020013;
+        public static final int logout=0x7f02000e;
+        public static final int pindetail=0x7f02000f;
+        public static final int pinelope=0x7f020010;
+        public static final int pinny=0x7f020011;
+        public static final int pinspage=0x7f020012;
+        public static final int social_person=0x7f020013;
+        public static final int stripebg=0x7f020014;
     }
     public static final class id {
         public static final int boardsView=0x7f080000;
