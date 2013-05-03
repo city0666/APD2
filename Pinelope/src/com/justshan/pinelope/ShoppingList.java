@@ -9,13 +9,13 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.Parse;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -97,20 +97,19 @@ public class ShoppingList extends Activity {
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
-		switch(item.getItemId()) {
-		case R.id.user:
-			//click on about item
-			Intent intent = new Intent(this, PinelopeActivity.class);            
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-			startActivity(intent);   
-			break;
-		case R.id.shoplist:
-			Intent intentList = new Intent(this, ShoppingList.class);            
-			intentList.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-			startActivity(intentList);   
-			break;
-
-		}
-		return true;
+	    switch(item.getItemId()) {
+	    case R.id.logout:
+	    	ParseUser.logOut();
+	    	Intent intentLogout = new Intent(this, PinelopeActivity.class);            
+	    	intentLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intentLogout);   
+	        break;
+	    case R.id.shoplist:
+	    	Intent intentList = new Intent(this, ShoppingList.class);            
+	    	intentList.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intentList);   
+	        break;	        
+    	}
+	    return true;
 	}
 }

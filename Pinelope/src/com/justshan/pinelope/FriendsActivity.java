@@ -2,7 +2,10 @@ package com.justshan.pinelope;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import lazylist.LazyAdapter;
+import lazylist.MyLazyAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +17,6 @@ import com.parse.ParseUser;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,8 +24,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -31,12 +34,20 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class FriendsActivity extends Activity {
 
-	ArrayList<String> arrayFriends = new ArrayList<String>();
+	//ArrayList<String> arrayFriends = new ArrayList<String>();
+	ArrayList<HashMap<String, String>> arrayFriends = new ArrayList<HashMap<String, String>>();
 	String listItem;
 	ListView _listview;
-	SimpleAdapter _adapter;
+	//SimpleAdapter _adapter;
+	MyLazyAdapter _adapter;
 	final Handler myHandler = new Handler();
+	GridView gridview;
 
+	public static final String KEY_HREF = "href";
+	public static final String KEY_PINNAME = "name";
+	public static final String KEY_UNAME = "username";
+	public static final String KEY_FNAME = "firstname";
+	public static final String KEY_LNAME = "lastname";
 
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,83 +62,83 @@ public class FriendsActivity extends Activity {
 		new MyTask().execute();
 
 	}
+	
+	private class MyTask extends AsyncTask<Void, Void, ArrayList<HashMap<String, String>>> {
 
-	private class MyTask extends AsyncTask<Void, Void, ArrayList<String>> {
-
-
-
-		/* (non-Javadoc)
-		 * @see android.os.AsyncTask#doInBackground(Params[])
-		 */
 		@Override
-		protected ArrayList<String> doInBackground(Void... params) {
+		protected ArrayList<HashMap<String, String>> doInBackground(Void... params) {
 
 			Document doc;
 			String linkText = "";
 			String linkHref = "";
 		
+			ArrayList<HashMap<String, String>> arrayFriends = new ArrayList<HashMap<String, String>>();
 
 			try {
 				doc = Jsoup.connect("http://m.pinterest.com/" + getIntent().getExtras().getString("USER") + "/following/").get();
 				//Elements names = doc.select("li a table.pinner tbody tr td span.user_name");
-				Elements usernames = doc.select("li a ");
+				Elements usernames = doc.select("ul.list_view td.pinner_image img");
 				for (Element el : usernames ) {
-					linkHref = el.attr("href");
-					linkText = el.text();
+					HashMap<String, String> map = new HashMap<String, String>(2); 
+					linkHref = el.attr("src");
+					//Log.i("IMG", linkHref);
+					linkText = el.attr("alt");
 
-					String theHref = linkHref.toString();	
-					theHref = theHref.replace("/", "");
+					String uname = linkHref.split("avatars/")[1];
+					String unamedash = uname.replace("-", "_");
+					String username = unamedash.split("_")[0];
+					Log.i("uname", username);
+					//String theHref = linkHref.toString();	
+					//theHref = theHref.replace("/", "");
+					String wholename = linkText.split("of ")[1];
+					String firstname = wholename.split(" ")[0];
+					String lastname = wholename.split(" ")[1];
+					
+					map.put(KEY_HREF, linkHref);
+					//Log.i("HREF", linkHref);
+					map.put(KEY_PINNAME, wholename);
+					//Log.i("NAME", wholename);
+					map.put(KEY_UNAME, username);
+					map.put(KEY_FNAME, firstname);
+					map.put(KEY_LNAME, lastname);
 
 					//arrayFriends.add(linkText); // add value to ArrayList
-					arrayFriends.add(linkText + " (" + theHref +")"); // add value to ArrayList
+					arrayFriends.add(map); // add value to ArrayList
 				}
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return arrayFriends; //<< return ArrayList from here
 
-
 		} 
 
 		@Override
-		protected void onPostExecute(ArrayList<String> result) {        
+		protected void onPostExecute(ArrayList<HashMap<String, String>> arrayFriends) {        
 
-			// get all value from result to display in TextView
+	        GridView gridview = (GridView)findViewById(R.id.gridviewfriends);
 
-
-			ListView _listview = (ListView) findViewById(R.id.listView1);
-			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(FriendsActivity.this, R.layout.list_friends, R.id.text1, arrayFriends);
-
-			_listview.setAdapter(_adapter);
+			_adapter = new MyLazyAdapter(FriendsActivity.this, arrayFriends);
+			gridview.setAdapter(_adapter);
+			
+			
 			Log.i("ListView", "lv populated");
 
-			_listview.setOnItemClickListener(new OnItemClickListener() {
+			gridview.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
 
-
-
-						listItem = parent.getItemAtPosition(position).toString();
-							String myParent = parent.getItemAtPosition(position).toString();	
-
-							myParent = myParent.substring(myParent.indexOf("(") + 1);
-							myParent = myParent.substring(0, myParent.indexOf(")"));
-
-							System.out.println(myParent);
-							String theURL = ("http://m.pinterest.com/" + myParent);
+							String theURL = ("http://m.pinterest.com/" + KEY_UNAME);
 							Log.i("URL", theURL);
 
 							Intent intent = new Intent(FriendsActivity.this, UserBoards.class);
 							//This is the information that will be sent.
 							intent.putExtra("BOARDS", theURL);
-							intent.putExtra("USERNAME", myParent);
+							intent.putExtra("USERNAME", KEY_UNAME);
+							intent.putExtra("PINNAME", KEY_PINNAME);
 							startActivity(intent);
-
-//							WebView boardWebView = (WebView) findViewById(R.id.webview);
-//							//boardWebView.setWebViewClient(new WebClient());
-//							boardWebView.loadUrl(theURL);
 
 							Log.i("name", parent.getItemAtPosition(position).toString());
 
@@ -138,6 +149,9 @@ public class FriendsActivity extends Activity {
 
 		}
 	}
+
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,7 +164,6 @@ public class FriendsActivity extends Activity {
 	    switch(item.getItemId()) {
 	    case R.id.logout:
 	    	ParseUser.logOut();
-	    	ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
 	    	Intent intentLogout = new Intent(this, PinelopeActivity.class);            
 	    	intentLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 	         startActivity(intentLogout);   

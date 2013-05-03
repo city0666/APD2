@@ -1,22 +1,19 @@
 package com.justshan.pinelope;
 
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import lazylist.LazyAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.origamilabs.library.views.StaggeredGridView;
-
+import com.parse.ParseUser;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,40 +23,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class PinsPage extends Activity {
 	
 	GridView gridview;
-//	ListView _listview;
 	JSONArray _results;
-	Context _context;
-	List<Map<String, String>> _pinData;
-	SimpleAdapter _adapter;
+	//ArrayList<String> arrayIMGS = new ArrayList<String>();
+	public static final String KEY_NAME = "name";
+	public static final String KEY_URL = "url";
+	public static final String KEY_DESC = "desc";
+	public static final String KEY_IMG = "img";
+	LazyAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pinspagegrid);
-		
-		StaggeredGridView gridView = (StaggeredGridView) this
-                .findViewById(R.id.staggeredGridView1);
-		
-//		_listview = (ListView) findViewById(R.id.listView1);
-		
-//		ImageView imgFavorite = (ImageView) findViewById(R.id.imagePins);
-//		imgFavorite.setClickable(true); 
-//		imgFavorite.setOnClickListener(new OnClickListener() {
-//		    @Override
-//		    public void onClick(View v) {
-//		    	Intent intent = new Intent(PinsPage.this, PinDetail.class);
-//				//This is the information that will be sent.
-//				startActivity(intent);
-//		    }
-//		});
+		setContentView(R.layout.lazygrid);
+	
 		getPins("");
 		
 	}
@@ -101,6 +83,7 @@ public class PinsPage extends Activity {
 	    @Override
     	protected void onPostExecute(String result){
     		Log.i("URL RESPONSE", result);
+    		ArrayList<HashMap<String, String>> _pinData = new ArrayList<HashMap<String, String>>();
     		try{
 					JSONObject json = new JSONObject(result);					
 					JSONObject productObject = json.getJSONObject("data");
@@ -111,13 +94,13 @@ public class PinsPage extends Activity {
 	    			}else{
 			        //Log.i("THE RESULTS", _results.toString());
 			        
-					_pinData = new ArrayList<Map<String, String>>();
+	    				
 					
 					
 				    for(int i=0;i<_results.length();i++){	
-				    	
+				    	HashMap<String, String> map = new HashMap<String, String>(); 
 						JSONObject s = _results.getJSONObject(i);
-						Map<String, String> map = new HashMap<String, String>(2);
+						//HashMap<String, String> map = new HashMap<String, String>(2);
 
 						String myIMG = s.getString("images");
 						String quotes = myIMG.replaceAll("\"", "");
@@ -129,37 +112,34 @@ public class PinsPage extends Activity {
 						String curly = pinnerQuotes.replaceAll("\\}", "");
 						String pinnerName = curly.split("full_name:")[1];
 												
-						map.put("desc", s.getString("description"));
-						map.put("img",  myIMG3);
-					    map.put("url", s.getString("link"));
-					    map.put("name", pinnerName);
+						map.put(KEY_DESC, s.getString("description"));
+						map.put(KEY_IMG,  myIMG3);
+					    map.put(KEY_URL, s.getString("link"));
+					    map.put(KEY_NAME, pinnerName);
 
 					    _pinData.add(map);
 					    
-					    StaggeredAdapter adapter = new StaggeredAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
-				                new String[] {"img", "desc", "url", "name"},
-				                new int[] {R.id.imageView1});
-
-				        gridview.setAdapter(adapter);
-				        adapter.notifyDataSetChanged();
-				    	
-//				        _adapter = new SimpleAdapter(getApplicationContext(), _pinData, R.layout.pin_item,
-//				                new String[] {"desc", "img", "url", "name"},
-//				                new int[] {R.id.text1});
-//				        _listview.setAdapter(_adapter);
+					    //arrayIMGS.add(myIMG3);
+					    //String value = map.get("img");
+					    
+					    gridview = (GridView)findViewById(R.id.gridView);
+					    adapter = new LazyAdapter(PinsPage.this, _pinData);        
+					    gridview.setAdapter(adapter);
 				        
 				        gridview.setOnItemClickListener(new OnItemClickListener() {
 				        	@Override
 							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {        		
 				        		@SuppressWarnings("unchecked")
-								HashMap<String, String> o = (HashMap<String, String>) gridview.getItemAtPosition(position);
+				        		HashMap<String, Object> o = (HashMap<String, Object>) ((LazyAdapter)gridview.getAdapter()).getItemEx(position);
+
+								//HashMap<String, String> o = (HashMap<String, String>) gridview.getItemAtPosition(position);
 				       
 				        			Intent intent = new Intent(getApplicationContext(), PinDetail.class);
 				        			intent.putExtra("DetailData", o.toString());
-				        			intent.putExtra("DetailDesc", o.get("desc"));
-				        			intent.putExtra("DetailIMG", o.get("img"));
-				        			intent.putExtra("DetailUrl", o.get("url"));
-				        			intent.putExtra("DetailName", o.get("name"));
+				        			intent.putExtra("DetailDesc", o.get(KEY_DESC).toString());
+				        			intent.putExtra("DetailIMG", o.get(KEY_IMG).toString());
+				        			intent.putExtra("DetailUrl", o.get(KEY_URL).toString());
+				        			intent.putExtra("DetailName", o.get(KEY_NAME).toString());
 				        			startActivity(intent);
 				        		
 							}
@@ -187,18 +167,17 @@ public class PinsPage extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 	    switch(item.getItemId()) {
-	    case R.id.user:
-	        //click on about item
-	    	Intent intent = new Intent(this, PinelopeActivity.class);            
-	         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-	         startActivity(intent);   
+	    case R.id.logout:
+	    	ParseUser.logOut();
+	    	Intent intentLogout = new Intent(this, PinelopeActivity.class);            
+	    	intentLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intentLogout);   
 	        break;
 	    case R.id.shoplist:
 	    	Intent intentList = new Intent(this, ShoppingList.class);            
 	    	intentList.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 	         startActivity(intentList);   
-	        break;
-	        
+	        break;	        
     	}
 	    return true;
 	}

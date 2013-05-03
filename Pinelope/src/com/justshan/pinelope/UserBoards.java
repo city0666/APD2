@@ -8,6 +8,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.parse.ParseUser;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -128,18 +130,17 @@ public class UserBoards extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 	    switch(item.getItemId()) {
-	    case R.id.user:
-	        //click on about item
-	    	Intent intent = new Intent(this, PinelopeActivity.class);            
-	         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-	         startActivity(intent);   
+	    case R.id.logout:
+	    	ParseUser.logOut();
+	    	Intent intentLogout = new Intent(this, PinelopeActivity.class);            
+	    	intentLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	         startActivity(intentLogout);   
 	        break;
 	    case R.id.shoplist:
 	    	Intent intentList = new Intent(this, ShoppingList.class);            
 	    	intentList.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 	         startActivity(intentList);   
-	        break;
-	        
+	        break;	        
     	}
 	    return true;
 	}

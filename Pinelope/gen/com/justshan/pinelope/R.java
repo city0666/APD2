@@ -9,22 +9,6 @@ package com.justshan.pinelope;
 
 public final class R {
     public static final class attr {
-        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int drawSelectorOnTop=0x7f010000;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int numColumns=0x7f010001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -58,44 +42,46 @@ containing a value of this type.
         public static final int pinspage=0x7f020012;
         public static final int social_person=0x7f020013;
         public static final int stripebg=0x7f020014;
+        public static final int stub=0x7f020015;
     }
     public static final class id {
         public static final int boardsView=0x7f080000;
-        public static final int cancel=0x7f080011;
-        public static final int desc=0x7f080008;
-        public static final int icon=0x7f080006;
-        public static final int imageDetail=0x7f080007;
-        public static final int imageView1=0x7f08000c;
-        public static final int listView1=0x7f080002;
-        public static final int logout=0x7f080018;
-        public static final int openWeb=0x7f080009;
-        public static final int pinny=0x7f080003;
-        public static final int pinsignup=0x7f080015;
-        public static final int pinuser=0x7f080012;
-        public static final int pinusergo=0x7f080014;
-        public static final int pinusersignup=0x7f080010;
-        public static final int savePin=0x7f08000a;
-        public static final int shopListView=0x7f08000d;
-        public static final int shoplist=0x7f080016;
-        public static final int signuppinuser=0x7f08000e;
-        public static final int signupuserpass=0x7f08000f;
-        public static final int staggeredGridView1=0x7f08000b;
-        public static final int text1=0x7f080004;
-        public static final int text2=0x7f080005;
+        public static final int cancel=0x7f080013;
+        public static final int desc=0x7f08000a;
+        public static final int gridView=0x7f080003;
+        public static final int gridviewfriends=0x7f080002;
+        public static final int icon=0x7f080007;
+        public static final int imageDetail=0x7f080009;
+        public static final int imageView1=0x7f08000f;
+        public static final int imagegrid=0x7f080004;
+        public static final int listView1=0x7f08000d;
+        public static final int logout=0x7f080019;
+        public static final int openWeb=0x7f08000b;
+        public static final int pinnerame=0x7f080006;
+        public static final int pinny=0x7f080005;
+        public static final int pinsignup=0x7f080017;
+        public static final int pinuser=0x7f080014;
+        public static final int pinusergo=0x7f080016;
+        public static final int pinusersignup=0x7f080012;
+        public static final int savePin=0x7f08000c;
+        public static final int shopListView=0x7f08000e;
+        public static final int shoplist=0x7f080018;
+        public static final int signuppinuser=0x7f080010;
+        public static final int signupuserpass=0x7f080011;
+        public static final int text1=0x7f080008;
         public static final int tvWho=0x7f080001;
-        public static final int user=0x7f080017;
-        public static final int userpass=0x7f080013;
+        public static final int userpass=0x7f080015;
     }
     public static final class layout {
         public static final int boards=0x7f030000;
         public static final int friends=0x7f030001;
-        public static final int list_friends=0x7f030002;
-        public static final int list_item2=0x7f030003;
-        public static final int pin_item=0x7f030004;
-        public static final int pindetail=0x7f030005;
-        public static final int pinspage=0x7f030006;
-        public static final int pinspagegrid=0x7f030007;
-        public static final int row_staggered_demo=0x7f030008;
+        public static final int lazygrid=0x7f030002;
+        public static final int lazyitem=0x7f030003;
+        public static final int list_friends=0x7f030004;
+        public static final int list_item2=0x7f030005;
+        public static final int pin_item=0x7f030006;
+        public static final int pindetail=0x7f030007;
+        public static final int pinspage=0x7f030008;
         public static final int shoplist=0x7f030009;
         public static final int signup=0x7f03000a;
         public static final int userentry=0x7f03000b;
@@ -150,49 +136,4 @@ containing a value of this type.
         public static final int TransparentExpandableListView=0x7f060004;
         public static final int TransparentListView=0x7f060003;
     }
-    public static final class styleable {
-        /** Attributes that can be used with a StaggeredGridView.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #StaggeredGridView_drawSelectorOnTop com.justshan.pinelope:drawSelectorOnTop}</code></td><td></td></tr>
-           <tr><td><code>{@link #StaggeredGridView_numColumns com.justshan.pinelope:numColumns}</code></td><td></td></tr>
-           </table>
-           @see #StaggeredGridView_drawSelectorOnTop
-           @see #StaggeredGridView_numColumns
-         */
-        public static final int[] StaggeredGridView = {
-            0x7f010000, 0x7f010001
-        };
-        /**
-          <p>This symbol is the offset where the {@link com.justshan.pinelope.R.attr#drawSelectorOnTop}
-          attribute's value can be found in the {@link #StaggeredGridView} array.
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:drawSelectorOnTop
-        */
-        public static final int StaggeredGridView_drawSelectorOnTop = 0;
-        /**
-          <p>This symbol is the offset where the {@link com.justshan.pinelope.R.attr#numColumns}
-          attribute's value can be found in the {@link #StaggeredGridView} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:numColumns
-        */
-        public static final int StaggeredGridView_numColumns = 1;
-    };
 }

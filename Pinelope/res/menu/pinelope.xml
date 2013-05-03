@@ -5,11 +5,6 @@
           android:icon="@drawable/collections_view_as_list"
           android:showAsAction="always" />
     
-    <item android:id="@+id/user"
-          android:title="User Settings"
-          android:icon="@drawable/social_person"
-          android:showAsAction="always" />
-    
     <item android:id="@+id/logout"
           android:title="User Settings"
           android:icon="@drawable/logout"
