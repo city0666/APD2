@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.parse.Parse;
 import com.parse.ParseUser;
 
 import android.app.Activity;
@@ -27,24 +28,25 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class UserBoards extends Activity {
-	
+
 	ArrayList<String> arrayBoards = new ArrayList<String>();
 	String listItem;
 	ListView _listview;
 	SimpleAdapter _adapter;
 	final Handler myHandler = new Handler();
 
-	
-	
+
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.boards);
-	
-		
+
+		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk");
+
 		new MyBoardsTask().execute();
-		
+
 	}
-	
+
 	private class MyBoardsTask extends AsyncTask<Void, Void, ArrayList<String>> {
 
 
@@ -88,16 +90,16 @@ public class UserBoards extends Activity {
 
 			ListView _listview = (ListView) findViewById(R.id.boardsView);
 			ArrayAdapter<String> _adapter = new ArrayAdapter<String>(UserBoards.this, R.layout.list_item2, R.id.text1, arrayBoards);
-			
+
 			_listview.setAdapter(_adapter);
 			Log.i("ListView", "lv populated");
 
 			_listview.setOnItemClickListener(new OnItemClickListener() {
-				
+
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
 
-					
+
 					String myParent = parent.getItemAtPosition(position).toString().toLowerCase().replaceAll("[^a-zA-Z0-9 ]+","");	
 					myParent = myParent.replace(' ', '-');
 					//String cutString = myParent.substring(0, 49);
@@ -106,21 +108,21 @@ public class UserBoards extends Activity {
 					System.out.println(myParent);
 					String theURL = ("https://api.pinterest.com/v3/pidgets/boards/" + getIntent().getExtras().getString("USERNAME")+ "/" + myParent + "/pins/");
 					Log.i("URL", theURL);
-					
+
 							Intent intent = new Intent(UserBoards.this, PinsPage.class);
 							//This is the information that will be sent.
 							intent.putExtra("PINS", theURL);
 							startActivity(intent);
-							
 
-					
+
+
 				}
 			});
 
-			
+
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

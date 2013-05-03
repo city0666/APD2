@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import lazylist.LazyAdapter;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -12,12 +14,17 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ShoppingList extends Activity {
 
@@ -64,26 +71,54 @@ public class ShoppingList extends Activity {
 
 		for (ParseObject hashMap : objects) {
 			map = new HashMap<String, String>();
-			map.put("line1", hashMap.getString("Name"));
-			map.put("line2", hashMap.getString("Desc"));
-			map.put("line3", hashMap.getString("IMG"));
-			map.put("line4", hashMap.getString("Url"));
+			map.put("name", hashMap.getString("Name"));
+			map.put("desc", hashMap.getString("Desc"));
+			map.put("img", hashMap.getString("IMG"));
+			map.put("url", hashMap.getString("Url"));
 			list.add(map);
 		}
 
 
 		// the from array specifies which keys from the map
 		// we want to view in our ListView
-		String[] from = { "line1", "line2","line3", "line4" };
+		String[] from = { "name", "desc","img", "url" };
 
 		// the to array specifies the TextViews from the xml layout
 		// on which we want to display the values defined in the from array
-		int[] to = { R.id.text1 };
+		int[] to = { R.id.shoptext1, R.id.shoptext2 };
 
 		// create the adapter and assign it to the listview
 		SimpleAdapter adapter = new SimpleAdapter(ShoppingList.this, list,
-				R.layout.list_item2, from, to);
-		_listview.setAdapter(adapter);
+				R.layout.shoplistitem, from, to);
+		 _listview.setAdapter(adapter);
+		_listview.setOnItemClickListener(new OnItemClickListener() {
+        	@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  
+//        		@SuppressWarnings("unchecked")
+//        		HashMap<String, String> o = (HashMap<String, String>) _listview.getItemAtPosition(position);
+//        		
+//        		 Intent internetIntent = new Intent(Intent.ACTION_VIEW,
+//            			 
+//             			/* using the passed url here! */
+//             			 Uri.parse( o.get("DetailUrl")));
+//             	 		//Log.i("URL txt", getIntent().getExtras().getString(_passedUrl));
+//             			 internetIntent.setComponent(new ComponentName("com.android.browser","com.android.browser.BrowserActivity"));
+//             			 internetIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//             			 startActivity(internetIntent);
+             			 
+        		@SuppressWarnings("unchecked")
+				HashMap<String, String> o = (HashMap<String, String>) _listview.getItemAtPosition(position);
+
+        			Intent intent = new Intent(getApplicationContext(), PinDetail.class);
+        			intent.putExtra("DetailData", o.toString());
+        			intent.putExtra("DetailDesc", o.get("desc"));
+        			intent.putExtra("DetailIMG", o.get("img"));
+        			intent.putExtra("DetailUrl", o.get("url"));
+        			intent.putExtra("DetailName", o.get("name"));
+        			startActivity(intent);
+        		
+			}
+		});
 
 	}  
 

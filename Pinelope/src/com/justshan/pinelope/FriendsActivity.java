@@ -117,7 +117,7 @@ public class FriendsActivity extends Activity {
 		@Override
 		protected void onPostExecute(ArrayList<HashMap<String, String>> arrayFriends) {        
 
-	        GridView gridview = (GridView)findViewById(R.id.gridviewfriends);
+	        gridview = (GridView)findViewById(R.id.gridviewfriends);
 
 			_adapter = new MyLazyAdapter(FriendsActivity.this, arrayFriends);
 			gridview.setAdapter(_adapter);
@@ -129,15 +129,20 @@ public class FriendsActivity extends Activity {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
+					@SuppressWarnings("unchecked")
+					HashMap<String, Object> o = (HashMap<String, Object>) ((MyLazyAdapter)gridview.getAdapter()).getItemEx(position);
 
-							String theURL = ("http://m.pinterest.com/" + KEY_UNAME);
-							Log.i("URL", theURL);
+							String theURL = ("http://m.pinterest.com/" + o.get(KEY_UNAME).toString() );
+							String theUser = o.get(KEY_UNAME).toString();
+							String pinnerName = o.get(KEY_PINNAME).toString();
+							
+							Log.i("URL", theURL + theUser + pinnerName);
 
 							Intent intent = new Intent(FriendsActivity.this, UserBoards.class);
 							//This is the information that will be sent.
 							intent.putExtra("BOARDS", theURL);
-							intent.putExtra("USERNAME", KEY_UNAME);
-							intent.putExtra("PINNAME", KEY_PINNAME);
+							intent.putExtra("USERNAME", theUser);
+							intent.putExtra("PINNAME", pinnerName);
 							startActivity(intent);
 
 							Log.i("name", parent.getItemAtPosition(position).toString());

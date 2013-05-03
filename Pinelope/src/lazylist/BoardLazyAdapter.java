@@ -3,8 +3,8 @@ package lazylist;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.justshan.pinelope.FriendsActivity;
 import com.justshan.pinelope.R;
+//import com.justshan.pinelope.UserBoards;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+//import android.widget.ImageView;
+//import android.widget.TextView;
 
-public class MyLazyAdapter extends BaseAdapter {
+public class BoardLazyAdapter extends BaseAdapter {
     
     private Activity activity;
     //private String[] data;
@@ -23,7 +23,7 @@ public class MyLazyAdapter extends BaseAdapter {
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
     
-    public MyLazyAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
+    public BoardLazyAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
         activity = a;
         data=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,16 +59,16 @@ public class MyLazyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
-            vi = inflater.inflate(R.layout.list_friends, null);
+            vi = inflater.inflate(R.layout.boardsitem, null);
 
-        TextView text=(TextView)vi.findViewById(R.id.pinnerame);;
-        ImageView image=(ImageView)vi.findViewById(R.id.pinny);
-        
-        HashMap<String, String> smart = new HashMap<String, String>();
-        smart = data.get(position);
-        
-        text.setText(smart.get(FriendsActivity.KEY_FNAME));
-        imageLoader.DisplayImage(smart.get(FriendsActivity.KEY_HREF), image);
+//        TextView text=(TextView)vi.findViewById(R.id.boardName);;
+//        ImageView image=(ImageView)vi.findViewById(R.id.boardImg);
+//        
+//        HashMap<String, String> smart = new HashMap<String, String>();
+//        smart = data.get(position);
+//        
+//        text.setText(smart.get(UserBoards.KEY_BNAME));
+//        imageLoader.DisplayImage(smart.get(UserBoards.KEY_BIMG), image);
         return vi;
     }
 }

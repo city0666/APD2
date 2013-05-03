@@ -3,6 +3,7 @@ package com.justshan.pinelope;
 
 import java.io.InputStream;
 
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -41,6 +42,8 @@ public class PinDetail extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pindetail);
+		
+		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk");
 		
 		Intent i = getIntent();
 		_passedPinInfo = i.getStringExtra("DetailData");
