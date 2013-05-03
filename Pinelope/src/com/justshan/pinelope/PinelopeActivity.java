@@ -7,8 +7,11 @@ import com.parse.ParseUser;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.util.Log;
+import android.content.DialogInterface;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +32,28 @@ public class PinelopeActivity extends Activity {
 		setContentView(R.layout.userentry);
 
 		Parse.initialize(this, "etqeIZdxSX0SqLeWoABVkIEd0UOe3Q6rHzLBtt9P", "ifp8lZdLqDcL0GVzEwJ9IIco6cmkvR652uwEdtJk"); 
+		
+		if (WebChecks.haveNetworkConnection(PinelopeActivity.this)){
+			Log.i("NETWORK CONNECTION", "search check CONNECTED!!!");
+	    }
+		else
+	    {//No Connected
+			Log.i("NETWORK CONNECTION", "search check NOTTTTTT CONNECTED!!!");
+			AlertDialog.Builder alt_bld2 = new AlertDialog.Builder(PinelopeActivity.this);
+			alt_bld2.setMessage("You must be connected to a network for use!")
+			.setCancelable(false)
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+			//finish();
+			}
+			});
+			AlertDialog alert = alt_bld2.create();
+			// Title for AlertDialog
+			alert.setTitle("Network Connection!");
+			// Icon for AlertDialog
+			alert.setIcon(R.drawable.ic_launcher);
+			alert.show();
+			}
 
 		login = (Button) findViewById(R.id.pinusergo);
 		usernameU = (EditText) findViewById(R.id.pinuser);
@@ -89,7 +114,6 @@ public class PinelopeActivity extends Activity {
 
 			}
 		});
-		
 
 	}
 
